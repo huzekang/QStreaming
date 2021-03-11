@@ -23,7 +23,16 @@ import com.qiniu.stream.util.Logging
 
 case class SparkSqlTranslator(sqlStatement: SqlStatement) extends StatementTranslator with Logging {
   override def translate(context: PipelineContext): Unit = {
-    logDebug(s"execute spark sql:\n ${sqlStatement.sql}")
-    context.sparkSession.sql(sqlStatement.sql)
+    var sql = sqlStatement.sql
+    sql = sql.replace("@original", "").trim.toUpperCase
+    logDebug(s"execute spark sql:\n ${sql}")
+    // judge if need to show dataframe
+    if (sql.startsWith("SELECT") || sql.startsWith("SHOW") || sql.startsWith("DESC")) {
+      context.sparkSession.sql(sql).show(false)
+    }else{
+      context.sparkSession.sql(sql)
+    }
+
+
   }
 }

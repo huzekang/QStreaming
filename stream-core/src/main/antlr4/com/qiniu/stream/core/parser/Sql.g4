@@ -62,9 +62,7 @@ dslStatement
     | sqlStatement
     ;
 
-createTestStatement
-    : K_CREATE K_TEST testName=identifier ('(' property (',' property)* ')')?  K_ON testDataset=tableIdentifier K_WITH  constraint (K_AND constraint)*
-    ;
+
 
 constraint
     :  'numRows()'     assertion                                                                                              #sizeConstraint
@@ -126,6 +124,10 @@ createSourceTableStatement
 
 createSinkTableStatement
     : K_CREATE streamTable=(K_STREAM| K_BATCH) K_OUTPUT K_TABLE tableIdentifier schemaSpec? K_USING (connectorSpec (',' connectorSpec)* ) formatSpec? partitionSpec? bucketSpec ? tableProperties?
+    ;
+
+createTestStatement
+    : K_CREATE K_CHECK testName=identifier ('(' property (',' property)* ')')?  K_ON testDataset=tableIdentifier K_WITH  constraint (K_AND constraint)*
     ;
 
 partitionSpec
@@ -230,7 +232,7 @@ commentStatement
     ;
 
 sqlStatement
-    :   ~(';' )+
+    :   '@original' ~(';' )+
     ;
 
 tableProvider
