@@ -21,6 +21,7 @@ import com.qiniu.stream.core.config.SourceTable
 import com.qiniu.stream.core.source.file.FileStreamReader
 import com.qiniu.stream.core.source.kafka.KafkaStreamReader
 import com.qiniu.stream.core.source.redis.RedisStreamReader
+import com.qiniu.stream.core.source.socket.SocketStreamReader
 import com.qiniu.stream.util.Logging
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
@@ -29,6 +30,7 @@ class StreamReader extends Reader with WaterMarker with Logging {
   lazy val streamReaders = Map(
     "kafka"->new KafkaStreamReader,
     "file"-> new FileStreamReader,
+    "socket"-> new SocketStreamReader,
     "redis"-> new RedisStreamReader
   )
 

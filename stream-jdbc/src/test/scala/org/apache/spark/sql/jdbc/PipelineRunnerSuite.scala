@@ -9,7 +9,7 @@ import scala.io.Source
 class PipelineRunnerSuite extends StreamTest {
   test("pipelineRunner test") {
     withTempDir { checkpointDir => {
-      val pipelineConfig = PipelineConfig(Source.fromFile("/Volumes/Samsung_T5/opensource/QStreaming/examples/originalSQL.dsl"))
+      val pipelineConfig = PipelineConfig(Source.fromFile("/Volumes/Samsung_T5/opensource/QStreaming/examples/socket2console.dsl"))
       PipelineRunner(pipelineConfig).run()
 
     }
