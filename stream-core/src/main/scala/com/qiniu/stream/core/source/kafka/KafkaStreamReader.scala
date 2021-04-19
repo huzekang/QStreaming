@@ -57,6 +57,8 @@ class KafkaStreamReader extends Reader with WaterMarker with Logging {
         withWaterMark(table, Some(rowTime))
       case _ => table
     }
+    table.printSchema()
+
     table
   }
 

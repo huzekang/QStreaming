@@ -62,6 +62,7 @@
         <module>stream-standalone</module>
         <module>stream-docker</module>
         <module>stream-redis</module>
+        <module>stream-test</module>
     </modules>
     <properties>
         <encoding>UTF-8</encoding>
