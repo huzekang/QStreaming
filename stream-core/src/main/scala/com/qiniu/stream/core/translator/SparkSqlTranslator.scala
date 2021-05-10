@@ -28,7 +28,7 @@ case class SparkSqlTranslator(sqlStatement: SqlStatement) extends StatementTrans
     logDebug(s"execute spark sql:\n ${sql}")
     // judge if need to show dataframe
     if (sql.startsWith("SELECT") || sql.startsWith("SHOW") || sql.startsWith("DESC")) {
-      context.sparkSession.sql(sql).show(false)
+      context.sparkSession.sql(sql).show()
     }else{
       context.sparkSession.sql(sql)
     }
