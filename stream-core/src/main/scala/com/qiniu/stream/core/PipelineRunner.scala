@@ -27,16 +27,15 @@ case class PipelineRunner(pipelineConfig: PipelineConfig) extends Logging {
   lazy val pipelineContext: PipelineContext = PipelineContext(settings)
 
   def run(): Unit = {
-    val version = "v0.2"
     log.info(
-      s"""
-        | _   _ ____   ___  _
-        | | | | / ___| / _ \| |
-        | | | | \___ \| | | | |
-        | | |_| |___) | |_| | |___
-        |  \___/|____/ \__\_\_____|         version $version
-        |
-        |""".stripMargin)
+      """
+         _   _ ____   ___  _
+         | | | / ___| / _ \| |
+         | | | \___ \| | | | |
+         | |_| |___) | |_| | |___
+          \___/|____/ \__\_\_____|             version V0.2
+
+      """)
     val pipeline = new PipelineParser(pipelineConfig).parse()
     run(pipeline)
   }

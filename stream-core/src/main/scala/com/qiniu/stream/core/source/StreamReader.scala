@@ -30,6 +30,9 @@ class StreamReader extends Reader with WaterMarker with Logging {
   lazy val streamReaders = Map(
     "kafka"->new KafkaStreamReader,
     "file"-> new FileStreamReader,
+    "csv"-> new FileStreamReader,
+    "json"-> new FileStreamReader,
+    "text"-> new FileStreamReader,
     "socket"-> new SocketStreamReader,
     "redis"-> new RedisStreamReader
   )
