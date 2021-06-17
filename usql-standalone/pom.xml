@@ -19,6 +19,9 @@
         </dependency>
     </dependencies>
     <build>
+        <!--        定义打包后的名字-->
+        <finalName>usql-${version}-spark-${dep.spark.version}-${scala.major.version}</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
