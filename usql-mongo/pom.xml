@@ -90,4 +90,32 @@
 
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <!-- here the phase you need -->
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <copy todir="${basedir}/../usql-release/mongo">
+                                    <fileset dir="target/">
+                                        <include name="${project.name}-${project.version}.jar" />
+                                    </fileset>
+                                </copy>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

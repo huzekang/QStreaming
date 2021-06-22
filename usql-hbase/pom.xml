@@ -24,17 +24,18 @@
         </dependency>
 
         <dependency>
+            <groupId>org.apache.hbase.connectors.spark</groupId>
+            <artifactId>hbase-spark</artifactId>
+            <version>${dep.hbase.connector.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.chinaunicom</groupId>
             <artifactId>usql-core</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.hbase.connectors.spark</groupId>
-            <artifactId>hbase-spark</artifactId>
-            <version>${dep.hbase.connector.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>org.scalatest</groupId>
@@ -136,4 +137,52 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <!-- here the phase you need -->
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <copy todir="${basedir}/../usql-release/hbase">
+                                    <fileset dir="target/">
+                                        <include name="${project.name}-${project.version}-jar-with-dependencies.jar" />
+                                    </fileset>
+                                </copy>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -13,7 +13,6 @@
         <module>usql-jdbc</module>
         <module>usql-mongo</module>
         <module>usql-hbase</module>
-        <module>usql-cassandra</module>
         <module>usql-elasticsearch6</module>
         <module>usql-hudi</module>
         <module>usql-standalone</module>

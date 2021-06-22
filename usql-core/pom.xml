@@ -16,6 +16,7 @@
             <groupId>com.amazon.deequ</groupId>
             <artifactId>deequ</artifactId>
         </dependency>
+        <!--        command line options parsing for Scala-->
         <dependency>
             <groupId>com.github.scopt</groupId>
             <artifactId>scopt_${scala.major.version}</artifactId>
@@ -58,6 +59,7 @@
             <groupId>org.antlr</groupId>
             <artifactId>antlr4-runtime</artifactId>
         </dependency>
+        <!--        加载配置文件的库-->
         <dependency>
             <groupId>com.typesafe</groupId>
             <artifactId>config</artifactId>
