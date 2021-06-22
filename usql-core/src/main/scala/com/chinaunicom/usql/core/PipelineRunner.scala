@@ -19,7 +19,7 @@ case class PipelineRunner(pipelineConfig: PipelineConfig) extends Logging {
          | | | / ___| / _ \| |
          | | | \___ \| | | | |
          | |_| |___) | |_| | |___
-          \___/|____/ \__\_\_____|             version V0.2
+          \___/|____/ \__\_\_____|             version V1.0.0
 
       """)
     val pipeline = new PipelineParser(pipelineConfig).parse()
