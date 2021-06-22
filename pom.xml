@@ -21,6 +21,7 @@
         <module>usql-redis</module>
         <module>usql-test</module>
         <module>usql-kafka</module>
+        <module>usql-faker</module>
     </modules>
     <properties>
         <encoding>UTF-8</encoding>

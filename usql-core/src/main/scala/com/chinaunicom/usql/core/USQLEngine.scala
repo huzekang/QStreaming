@@ -8,10 +8,10 @@ import scopt.OptionParser
 import scala.io.Source
 
 
-object Streaming extends App {
+object USQLEngine extends App {
 
-  val cliParser: OptionParser[PipelineConfig] = new OptionParser[PipelineConfig]("QStreaming") {
-    head("QStreaming")
+  val cliParser: OptionParser[PipelineConfig] = new OptionParser[PipelineConfig]("USQL") {
+    head("USQL")
 
     opt[String]('j', "job")
       .required()

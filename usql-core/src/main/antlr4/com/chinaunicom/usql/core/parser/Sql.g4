@@ -125,7 +125,7 @@ bucketSpec
     ;
 
 tableProperties
-    :  'TBLPROPERTIES' '(' property (',' property)* ')'
+    :  K_TBLPROPERTIES '(' property (',' property)* ')'
     ;
 
 connectorSpec
@@ -147,7 +147,7 @@ timeField
     ;
 
 rowFormat
-    :'TEXT'|'AVRO'|'JSON'|'CSV'|'REGEX'
+    :K_TEXT|K_AVRO|K_JSON|K_CSV|K_REGEX
     ;
 
 schemaField
@@ -155,7 +155,7 @@ schemaField
     ;
 
 fieldType
-    :'INTEGER'|'LONG'|'TINYINT'|'SMALLINT'|'STRING'|'TIMESTAMP'|'DATE'|'TIME'|'DATETIME'|'BOOLEAN'|'DOUBLE'|'FLOAT'|'SHORT'|'BYTE'|'VARCHAR'|('DECIMAL(' precision=INTEGER_VALUE ','  scale=INTEGER_VALUE ')')
+    : K_INTEGER|K_LONG|K_TINYINT|K_SMALLINT|K_STRING|K_TIMESTAMP|K_DATE|K_TIME|K_DATETIME|K_BOOLEAN|K_DOUBLE|K_FLOAT|K_SHORT|K_BYTE|K_VARCHAR|( K_DECIMAL'(' precision=INTEGER_VALUE ','  scale=INTEGER_VALUE ')')
     ;
 
 insertStatement
@@ -276,6 +276,32 @@ K_OR: O R;
 K_REPLACE: R E P L A C E;
 K_AND: A N D;
 K_ON: O N;
+
+K_TBLPROPERTIES: T B L P R O P E R T I E S;
+K_TEXT: T E X T;
+K_AVRO: A V R O;
+K_JSON: J S O N;
+K_CSV: C S V;
+K_REGEX: R E G E X;
+
+K_INTEGER: I N T E G E R;
+K_LONG :  L O N G;
+K_TINYINT: T I N Y I N T;
+K_SMALLINT: S M A L L I N T;
+K_STRING: S T R I N G;
+K_TIMESTAMP: T I M E S T A M P;
+K_DATE: D A T E;
+K_TIME: T I M E;
+K_DATETIME: D A T E T I M E;
+K_BOOLEAN: B O O L E A N;
+K_DOUBLE: D O U B L E;
+K_FLOAT: F L O A T;
+K_SHORT: S H O R T;
+K_BYTE: B Y T E;
+K_VARCHAR: V A R C H A R;
+K_DECIMAL: D E C I M A L;
+
+
 
 STRING
     : '\'' ( ~('\''|'\\') | ('\\' .) )* '\''
