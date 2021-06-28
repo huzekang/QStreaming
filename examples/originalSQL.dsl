@@ -1,1 +1,1 @@
-@original show tables
+show databases;

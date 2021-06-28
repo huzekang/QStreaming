@@ -1,7 +1,9 @@
 package com.chinaunicom.usql.core.parser
 
 import com.amazon.deequ.checks.CheckLevel
-import com.chinaunicom.usql.core.config.{CreateFunctionStatement, CreateViewStatement, InsertStatement, PipelineConfig, Settings, SinkTable, SourceTable, VerifyStatement, ViewType}
+import com.chinaunicom.usql.core.PipelineContext
+import com.chinaunicom.usql.core.config.{CreateFunctionStatement, CreateViewStatement, InsertStatement, PipelineConfig, Settings, SinkTable, SourceTable, SqlStatement, VerifyStatement, ViewType}
+import com.chinaunicom.usql.core.translator.SparkSqlTranslator
 import org.scalatest.FunSuite
 
 class PipelineParserTest extends FunSuite{
@@ -65,6 +67,11 @@ class PipelineParserTest extends FunSuite{
        |   isNonNegative(numViews)  and
        |   containsUrl(description) >= 0.5 and
        |   hasApproxQuantile(numViews, 0.5) <= 10;""".stripMargin
+
+  val sparkSqlStatement=
+    """
+      |show databases;
+      |""".stripMargin
 
   test("parse createSourceTableStatement"){
 
@@ -161,6 +168,17 @@ class PipelineParserTest extends FunSuite{
         assert(it.check != null)
         assert(it.check.level==CheckLevel.Error)
     }
+  }
+  test("parse sparksql"){
+
+    val settings = Settings.load()
+    val pipeline = new PipelineParser( PipelineConfig.DEFAULT).parseFromString(sparkSqlStatement)
+    val pipelineContext = PipelineContext(settings)
+    val sqlStatement = pipeline.statements.find(_.isInstanceOf[SqlStatement]).map(_.asInstanceOf[SqlStatement])
+    assert(sqlStatement.isDefined)
+    SparkSqlTranslator(sqlStatement.get).translate(pipelineContext)
+
+
   }
 
   test("parse pipeline"){

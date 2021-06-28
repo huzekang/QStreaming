@@ -218,7 +218,7 @@ commentStatement
     ;
 
 sqlStatement
-    :   '@original' ~(';' )+
+    :   ~(';' )+
     ;
 
 tableProvider

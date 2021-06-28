@@ -11,13 +11,10 @@
         <module>usql-utils</module>
         <module>usql-core</module>
         <module>usql-jdbc</module>
-        <module>usql-mongo</module>
-        <module>usql-hbase</module>
         <module>usql-elasticsearch6</module>
         <module>usql-hudi</module>
         <module>usql-standalone</module>
         <module>usql-docker</module>
-        <module>usql-redis</module>
         <module>usql-test</module>
         <module>usql-kafka</module>
         <module>usql-faker</module>

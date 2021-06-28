@@ -7,6 +7,15 @@
 
 ## 本机测试执行SQL作业
 
+### 兼容原生spark-sql
+```shell script
+spark-submit \
+--class com.chinaunicom.usql.core.USQLEngine \
+--master local[*]  \
+usql-standalone/target/usql-1.0.0-spark-2.4.7-2.11-jar-with-dependencies.jar \
+-j examples/originalSQL.dsl
+```
+
 ### 批处理
 
 #### 启动hive support
@@ -38,6 +47,17 @@ spark-submit \
 --jars usql-hudi/target/usql-hudi-1.0.0-jar-with-dependencies.jar \
 usql-standalone/target/usql-1.0.0-spark-2.4.7-2.11-jar-with-dependencies.jar \
 -j examples/hudi2console.dsl
+```
+
+#### 读取es数据源
+```shell script
+spark-submit \
+--class com.chinaunicom.usql.core.USQLEngine \
+--master local[*] \
+--conf 'spark.serializer=org.apache.spark.serializer.KryoSerializer' \
+--jars usql-elasticsearch6/target/usql-elasticsearch6-1.0.0-jar-with-dependencies.jar \
+usql-standalone/target/usql-1.0.0-spark-2.4.7-2.11-jar-with-dependencies.jar \
+-j examples/es2console.dsl
 ```
 
 #### 读取faker数据源

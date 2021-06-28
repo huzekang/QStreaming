@@ -13,6 +13,16 @@
     <properties>
         <dep.elasticsearch.version>6.8.13</dep.elasticsearch.version>
     </properties>
+    <repositories>
+        <repository>
+            <id>dorisdb-maven-releases</id>
+            <url>http://dorisdbvisitor:dorisdbvisitor134@nexus.dorisdb.com/repository/maven-releases/</url>
+        </repository>
+        <repository>
+            <id>dorisdb-maven-snapshots</id>
+            <url>http://dorisdbvisitor:dorisdbvisitor134@nexus.dorisdb.com/repository/maven-snapshots/</url>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>org.apache.spark</groupId>
@@ -46,7 +56,11 @@
             <scope>test</scope>
         </dependency>
 
-
+        <dependency>
+            <groupId>com.dorisdb.connector</groupId>
+            <artifactId>flink-connector-doris</artifactId>
+            <version>1.0.27-SNAPSHOT</version>  <!-- for flink-1.11 ~ flink-1.12 -->
+        </dependency>
 
         <dependency>
             <groupId>org.scalatest</groupId>
