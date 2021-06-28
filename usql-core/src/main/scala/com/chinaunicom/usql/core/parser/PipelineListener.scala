@@ -4,7 +4,7 @@ package com.chinaunicom.usql.core.parser
 import com.amazon.deequ.checks.{Check, CheckLevel}
 import com.amazon.deequ.constraints.{ConstrainableDataTypes, StreamConstraints}
 import com.chinaunicom.usql.core.parser.SqlParser._
-import com.chinaunicom.usql.core.config.{CreateFunctionStatement, CreateViewStatement, InsertStatement, Pipeline, SqlStatement, VerifyStatement, ViewType}
+import com.chinaunicom.usql.core.config.{CreateFunctionStatement, CreateViewStatement, InsertStatement, Pipeline, SqlStatement, CheckStatement, ViewType}
 import com.chinaunicom.usql.core.parser.SqlParser.{ApproxCountDistinctConstraintContext, ApproxQuantileConstraintContext, CompleteConstraintContext, ContainedInConstraintContext, ContainsEmailConstraintContext, ContainsUrlConstraintContext, DataTypeConstraintContext, DateFormatConstraintContext, HasMaxConstraintContext, HasMaxLengthConstraintContext, HasMeanConstraintContext, HasMinConstraintContext, HasMinLengthConstraintContext, HasSumConstraintContext, IsNonNegativeConstraintContext, IsPositiveConstraintContext, PatternConstraintContext, SatisfyConstraintContext, SelectStatementContext, SizeConstraintContext, UniqueConstraintContext}
 import com.chinaunicom.usql.util.Logging
 import org.antlr.v4.runtime.ParserRuleContext
@@ -165,7 +165,7 @@ class PipelineListener extends SqlBaseListener with Logging {
         check = check.hasApproxCountDistinct(ctx.column.getText, ctx.assertion().map(_.doubleAssertion).getOrElse(Check.IsOne))
     }
 
-    pipeline.statements += VerifyStatement(testName, testInput, testOutput, check)
+    pipeline.statements += CheckStatement(testName, testInput, testOutput, check)
   }
 
 

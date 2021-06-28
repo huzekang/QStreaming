@@ -5,7 +5,7 @@ import com.amazon.deequ.checks.{Check, CheckLevel}
 import com.chinaunicom.usql.core.config.ViewType.ViewType
 import com.chinaunicom.usql.core.PipelineContext
 import com.chinaunicom.usql.core.parser.SqlStructType
-import com.chinaunicom.usql.core.translator.{CreateFunctionTranslator, CreateViewTranslator, InsertStatementTranslator, PipelineTranslator, SinkTableTranslator, SourceTableTranslator, SparkSqlTranslator, VerifyStatementTranslator}
+import com.chinaunicom.usql.core.translator.{CreateFunctionTranslator, CreateViewTranslator, InsertStatementTranslator, PipelineTranslator, SinkTableTranslator, SourceTableTranslator, SparkSqlTranslator, CheckStatementTranslator}
 import com.chinaunicom.usql.util.Logging
 
 import scala.collection.mutable.ArrayBuffer
@@ -93,9 +93,9 @@ case class SinkTable(streaming: Boolean = true, name: String,
 }
 
 
-case class VerifyStatement(name:String,input: String, output: Option[SinkTable],  check: Check) extends Statement {
+case class CheckStatement(name:String, input: String, output: Option[SinkTable], check: Check) extends Statement {
 
-  override def execute(context: PipelineContext): Unit = VerifyStatementTranslator(this).translate(context)
+  override def execute(context: PipelineContext): Unit = CheckStatementTranslator(this).translate(context)
 }
 
 

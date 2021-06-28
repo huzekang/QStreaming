@@ -6,6 +6,14 @@
 ```
 
 ## 本机测试执行SQL作业
+### 数据稽查
+```shell script
+spark-submit \
+--class com.chinaunicom.usql.core.USQLEngine \
+--master local[*]  \
+usql-standalone/target/usql-1.0.0-spark-2.4.7-2.11-jar-with-dependencies.jar \
+-j examples/hdfsQualityCheck.dsl
+```
 
 ### 兼容原生spark-sql
 ```shell script
