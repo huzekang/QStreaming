@@ -2,7 +2,7 @@ package com.chinaunicom.usql.core.parser
 
 import com.amazon.deequ.checks.CheckLevel
 import com.chinaunicom.usql.core.PipelineContext
-import com.chinaunicom.usql.core.config.{CreateFunctionStatement, CreateViewStatement, InsertStatement, PipelineConfig, Settings, SinkTable, SourceTable, SqlStatement, VerifyStatement, ViewType}
+import com.chinaunicom.usql.core.config.{CreateFunctionStatement, CreateViewStatement, InsertStatement, PipelineConfig, Settings, SinkTable, SourceTable, SqlStatement, CheckStatement, ViewType}
 import com.chinaunicom.usql.core.translator.SparkSqlTranslator
 import org.scalatest.FunSuite
 
@@ -158,7 +158,7 @@ class PipelineParserTest extends FunSuite{
     val settings = Settings.load()
     val pipeline = new PipelineParser( PipelineConfig.DEFAULT).parseFromString(createTestStatement)
 
-    val verifyStatement = pipeline.statements.find(_.isInstanceOf[VerifyStatement]).map(_.asInstanceOf[VerifyStatement])
+    val verifyStatement = pipeline.statements.find(_.isInstanceOf[CheckStatement]).map(_.asInstanceOf[CheckStatement])
     assert(verifyStatement.isDefined)
 
     verifyStatement foreach{
@@ -198,7 +198,7 @@ class PipelineParserTest extends FunSuite{
     assert(pipeline.statements(1).isInstanceOf[SinkTable])
     assert(pipeline.statements(2).isInstanceOf[CreateViewStatement])
     assert(pipeline.statements(3).isInstanceOf[CreateFunctionStatement])
-    assert(pipeline.statements(4).isInstanceOf[VerifyStatement])
+    assert(pipeline.statements(4).isInstanceOf[CheckStatement])
     assert(pipeline.statements(5).isInstanceOf[InsertStatement])
 
   }
