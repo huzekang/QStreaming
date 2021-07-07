@@ -117,3 +117,30 @@ spark-submit \
 usql-standalone/target/usql-1.0.0-spark-2.4.7-2.11-jar-with-dependencies.jar \
 -j examples/textstream2console.dsl
 ```
+
+#### 读取kafka
+```shell script
+spark-submit \
+--class com.chinaunicom.usql.core.USQLEngine \
+--master local[*] \
+--jars usql-kafka/target/usql-kafka-1.0.0-jar-with-dependencies.jar \
+--conf 'spark.serializer=org.apache.spark.serializer.KryoSerializer' \
+ --conf "spark.driver.extraJavaOptions=-Dlog4j.configuration=file:log4j.properties" \
+usql-standalone/target/usql-1.0.0-spark-2.4.7-2.11-jar-with-dependencies.jar \
+-j examples/kafkaOfJson2console.dsl
+```
+其中指定log4j.propeties文件可以减少kafka读取时过多的日志。
+
+如果想调试这个流作业，可以在提交命令末尾加上`-c stream.debug=true`，该配置可以在加载到数据后就结束作业。
+
+#### 读取kafka写hudi
+```shell script
+spark-submit \
+--class com.chinaunicom.usql.core.USQLEngine \
+--master local[*] \
+--jars usql-kafka/target/usql-kafka-1.0.0-jar-with-dependencies.jar,usql-hudi/target/usql-hudi-1.0.0-jar-with-dependencies.jar \
+--conf 'spark.serializer=org.apache.spark.serializer.KryoSerializer' \
+ --conf "spark.driver.extraJavaOptions=-Dlog4j.configuration=file:log4j.properties" \
+usql-standalone/target/usql-1.0.0-spark-2.4.7-2.11-jar-with-dependencies.jar \
+-j examples/kafkaOfJson2hudi.dsl
+```
